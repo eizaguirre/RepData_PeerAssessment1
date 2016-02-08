@@ -148,7 +148,7 @@ Rows with missing values are removed from the dataframe:
 activityWithoutNA <- activity[complete.cases(activity),]
 ```
 
-Histogram of the total Steps taken each day
+Histogram of the total Steps taken each day:
 
 ```r
 x2 <- aggregate(activityWithoutNA$steps, by=list(activityWithoutNA$date), FUN=sum)
@@ -178,7 +178,7 @@ Factor Variable that specifies the name of the weekday
 activityWithoutNA$weekday  <- as.factor(weekdays(strptime(activityWithoutNA$date, "%Y-%m-%d")))
 ```
 
-time series plots for Weekdays and Weekends
+time series plots for Weekdays and Weekends:
 
 ```r
 par(mfrow = c(2,1))
