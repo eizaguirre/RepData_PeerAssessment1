@@ -172,3 +172,22 @@ mean(x2$x); median(x2$x)
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+Factor Variable that specifies the name of the weekday
+
+```r
+activityWithoutNA$weekday  <- as.factor(weekdays(strptime(activityWithoutNA$date, "%Y-%m-%d")))
+```
+
+time series plots for Weekdays and Weekends
+
+```r
+par(mfrow = c(2,1))
+activityWithoutNAWeekDay <- activityWithoutNA[!(activityWithoutNA$weekday %in% c("Saturday","Sunday")),]
+activityWithoutNAWeekEnd <- activityWithoutNA[activityWithoutNA$weekday %in% c("Saturday","Sunday"),]
+t2 <- aggregate(activityWithoutNAWeekDay$steps, by=list(activityWithoutNAWeekDay$interval), FUN=sum)
+t3 <- aggregate(activityWithoutNAWeekEnd$steps, by=list(activityWithoutNAWeekEnd$interval), FUN=sum)
+plot(t2$Group.1, t2$x, type = "l", xlab="Interval", ylab="Number of Steps", main = "Weekdays")
+plot(t3$Group.1, t3$x, type = "l", xlab="Interval", ylab="Number of Steps", main = "Weekends")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)
