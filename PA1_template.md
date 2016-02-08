@@ -113,7 +113,7 @@ mean(x$x); median(x$x)
 ```
 
 ## What is the average daily activity pattern?
-Time Series Plot with the Average number of steps taken by day across all dates:
+Time Series Plot with the Average number of steps taken by Interval across all dates:
 
 ```r
 t <- aggregate(activity$steps, by=list(activity$interval), FUN=sum, na.rm=TRUE)
@@ -142,8 +142,33 @@ length(which(is.na(activity$steps)))
 ```
 ## [1] 2304
 ```
+Rows with missing values are removed from the dataframe:
 
+```r
+activityWithoutNA <- activity[complete.cases(activity),]
+```
 
+Histogram of the total Steps taken each day
 
+```r
+x2 <- aggregate(activityWithoutNA$steps, by=list(activityWithoutNA$date), FUN=sum)
+hist(x2$x, xlab = "Steps", main = "Steps taken each day", col = "azure")
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)
+
+Mean  and Median of the total number of steps taken each day:
+
+```r
+mean(x2$x); median(x2$x)
+```
+
+```
+## [1] 10766.19
+```
+
+```
+## [1] 10765
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
